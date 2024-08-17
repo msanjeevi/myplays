@@ -1,0 +1,40 @@
+---
+- name: Play to create a web side with Service Info.
+  hosts: all
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Install http web server
+     yum: 
+      name: 
+       - httpd
+       - firewalld
+      state: latest
+   - name: Task to start web server service - httpd
+     service:
+      name: httpd
+      state: started
+      enabled: true
+   - name: Task to start firewalld service - firewalld
+     service:
+      name: firewalld
+      state: started
+      enabled: true
+   - name: task to add port to firewall
+     firewalld:
+      service: http
+      permanent: true
+      state: enabled
+      immediate: yes
+   - name: Task to add a line in /var/www/html/index.html
+     lineinfile:
+      line: "<html>
+              <h1>
+                The server name is {{ansible_hostname}}, <br>
+                The IP address is {{ansible_ens192.ipv4.address}} and <br>
+                The  mac address is {{ansible_ens192.macaddress}}  and the <br>
+                The number of processor count {{ansible_processor_count}} </h1></html>"
+      dest: /var/www/html/index.html #file name in which the line is kept
+      create: yes #create the file if it doesnt exists          
+...
+#end of the play

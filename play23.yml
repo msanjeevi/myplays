@@ -1,0 +1,14 @@
+---
+- name: Play to demonstrate command module
+  hosts: [ 192.168.1.37 ]
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Task to create a directory
+     shell: mkdir /tmp/shelldir
+   - name: copy a file
+     shell: cp /var/log/messages /tmp/shelldir
+   - name: task to compress a given file
+     shell: gzip /tmp/shelldir/messages
+     #need to cross check again 
+...

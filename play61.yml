@@ -1,0 +1,36 @@
+---
+#Ansible conditonal operators
+# == Equal
+# < Lessthan
+# > Greaterthan
+# <= Lessthan or equal to
+# >= Greaterthan or equal to
+# != Not equal to
+# Variable exist ie is defined
+# example: "{{myvar}}" is defined"
+# Variable does not exist ie is not defined
+# example: "{{myvar}}" is not defined"
+# 'and', 'or', 'not' logical operators
+# 'in' operator
+# Example: "{{user}} in [Roshan,Sanjay,Siva,Mani,Uday]"
+- name: Play book to demonstrate Ansible conditonal operators
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  vars:
+   fname: /etc/passwd1
+  tasks:
+   - name: Check if file exists 
+     stat:
+      path: "{{fname}}"
+     register: out
+     ignore_errors: true
+   - name: Check if file exists
+     debug:
+      msg: File "{{fname}}" Exists
+     when: out.stat.exists
+     
+   - name: Check if file doesnt exists
+     debug:
+      msg: File "{{fname}}" does not Exists
+     when: out.stat.exists == false

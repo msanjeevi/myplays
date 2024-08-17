@@ -1,0 +1,27 @@
+---
+- name: Play to demonstrate block... rescue...always.
+#IN playbooks, blocks are clauses that enclose tasks.
+#Blocks allow for logical grouping of tasks and can be used to control how taks are excuted.
+#Blocks in playbooks can be used with three keywords:
+#Block: Defines the main task to run
+#Rescue: Defines the taks that will be run if the tasks defined in the block clausefails.
+#always: defines th tasks that will always run independently of the success or failure of tasks.
+#defined in the block and rescue clauses.
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  tasks:
+   - block:
+     - name: Task to install a package
+       yum:
+        name: mariadb
+        state: installed
+     rescue:
+      - name: Task to rescue
+        debug:
+         msg: "i am in rescue"
+     always:
+      - name: Task for always block
+        debug:
+         msg: "I am in always block"      
+...       

@@ -1,0 +1,19 @@
+---
+- name: Play to copy a file from one directory another in the same remote server
+  hosts: all
+  become: true
+  remote_user: ansible
+  gather_facts: no
+  vars:
+   fname: /etc/resolv.conf
+   destfile: /var/resolv.conf
+  tasks:
+   - name: Task to copy {{fname}} file as {{destfile}}
+     copy: 
+      src: "{{fname}}"
+      dest: "{{destfile}}"
+      remote_src: yes #this tell that the source file is available at remote server
+                      #By defualt remote_src: no ie source is available in control node
+      backup: yes #if you want to crate a backup before you copy 
+...
+#end of the play

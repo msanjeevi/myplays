@@ -1,0 +1,17 @@
+---
+- name: Demonstrate variables
+  hosts: localhost
+  remote_user: anisble
+  become: yes
+  vars_files:
+   - vars/prod_user.yml
+  vars:
+   u1_name: db2
+  tasks:
+   - name: Include variables
+   #include_vars overrides vars_files
+     include_vars: vars/dev_user.yml
+   - name: Task to create a user
+     debug:
+      msg: "{{u1_name}}"
+...

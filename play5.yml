@@ -1,0 +1,29 @@
+---
+#Ansible playbook can have multiple plays. This playbook demonstrates multiple plays in single playbook
+- name: Play to install samba server
+  hosts: [ 192.168.1.98, 192.168.1.77 ]
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Task to install samba
+     yum:
+      name: samba
+      state: latest
+#End of the play
+#Below is the start of play2
+- name: Play2 to start samba service 
+  hosts: [ 192.168.1.98, 192.168.1.77 ]
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: task to install samba - smbd
+     service:
+      name: smb
+      state: started
+   - name: Task to start nmbd
+     service:
+      name: nmb
+      state: started      
+  #End of the second play
+  #End of the playbook
+...

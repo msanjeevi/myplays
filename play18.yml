@@ -1,0 +1,13 @@
+---
+- name: Demonstrate to create a soft link
+  hosts: all
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: create a soft link file
+     file:
+      src: /etc/passwd
+      dest: /home/ansible/linkpasswd # create a soft link file to the aboe source
+      state: link
+      force: yes #overwrite if the link file exists already
+...

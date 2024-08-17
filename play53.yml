@@ -1,0 +1,17 @@
+---
+- name: Demonstrate stat module
+  hosts: localhost
+  vars:
+   fname: /sbin #/usr/bin/passwd #/etc/passwd
+  remote_user: ansible
+  become: true
+  tasks:
+   - name: Use state module to get file statistics
+     stat:
+      path: "{{fname}}"
+     register: out
+   - name: Print the register Variable output
+     debug:
+      var: out
+...
+#end of the play

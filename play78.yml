@@ -1,0 +1,11 @@
+---
+- name: Demonstrate to work with unreachable managed node
+  hosts: all
+  remote_user: ansible
+  become: true
+  gather_facts: no
+  tasks:
+   - name: excute shell command
+     shell: echo "Hi">/tmp/hi.txt
+     ignore_unreachable: yes
+...

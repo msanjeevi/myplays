@@ -1,0 +1,23 @@
+---
+- name: Play to demonstrate rsync in pull mode
+  #hosts: [all]
+
+  hosts: 192.168.1.41
+  gather_facts: no
+  become: yes
+  remote_user: ansible
+  vars:
+  # source_dir: /home/ansible/playbooks
+   source_dir: /home/ansible/playbook
+   destin_dir: /trainer
+  tasks:
+   - name: Synchronize {{source_dir}} and {{destin_dir}} using synchronize module using pull more
+     synchronize:
+      src: "{{source_dir}}"
+      dest: "{{destin_dir}}"
+      mode: pull
+      compress: yes
+      archive: yes
+      recursive: yes
+...
+#End

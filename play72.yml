@@ -1,0 +1,38 @@
+---
+- name: play to read CSV file
+  hosts: all
+  become: true
+  remote_user: ansible
+  vars:
+   lfname: sapulist.csv
+   dfname: /tmp/sapulist.csv
+  tasks:
+   - name: Push {{lfname}} to remote
+     copy:
+      src: "{{lfname}}"
+      dest: "{{dfname}}"
+   - name: Read {{dfname}} using read_csv module
+     read_csv:
+      path: "{{dfname}}"
+     register: out
+   - name: Create group as per given in the csv
+     group:
+      name: "{{item.group}}"
+      state: present
+     loop: "{{out.list}}"     
+   - name: Create users as per given in the csv
+     user:
+      name: "{{item.name}}"
+      comment: "{{item.first}}_{{item.last}}"
+      uid: "{{item.uid}}"
+      groups: "{{item.group}}"
+      password: "{{item.password | password_hash('sha512')}}"
+      append: yes
+      state: present
+     loop: "{{out.list}}"
+   - name: remove {{dfname}}
+     file:
+      path: "{{dfname}}"
+      state: absent
+...
+#End

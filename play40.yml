@@ -1,0 +1,13 @@
+---
+- name: Play to demonstrate anisble facts
+  hosts: all #sapestate #[192.168.1.31, 192.168.1.32, 192.168.1.35]
+  become: true
+#  vars:
+#   user: unknownUser
+  remote_user: ansible
+  tasks:
+   - name: print ansible facts using debug module
+     debug:
+      msg: |
+           
+           The user is "{{user}}"

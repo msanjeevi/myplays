@@ -1,0 +1,14 @@
+---
+- name: Create a user , fetch password from the vault
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  vars_files: /home/ansible/ansible file/ansi_sec.yml
+  gather_facts: no
+  tasks:
+   - name: ask to create a user
+     user: 
+      name: mahiansi
+      password: "{{pass|password_hash('sha512')}}"
+      state: present
+...
