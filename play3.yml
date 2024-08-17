@@ -2,7 +2,7 @@
 - name: play to install http web server
   hosts: all
   remote_user: ansible
-  become: true
+  #  become: true
   tasks:
    - name: task to copy repo file from local to remote server
      copy:
