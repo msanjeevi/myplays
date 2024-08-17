@@ -1,0 +1,16 @@
+---
+- name: play to demonstrate register variable
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Task to start web server
+     service:
+      name: httpd
+      state: restarted
+     register: vname1
+   - name: debug module to print register variable
+     debug:
+      #var: vname1
+      msg: "The service name is: {{vname1['name']}} and state is {{vname1['state']}}"
+...

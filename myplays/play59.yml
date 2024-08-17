@@ -1,0 +1,17 @@
+---
+- name: Play to demonstrate fail module
+  hosts: localhost
+  gather_facts: no
+  remote_user: ansible
+  become: true
+  vars:
+   res: false
+  tasks:
+   - name: fial the task using fail module
+     fail:
+      msg: "I am here"
+     when: res
+   - name: execute this after fail module
+     debug:
+      msg: helo there
+...

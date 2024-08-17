@@ -1,0 +1,25 @@
+---
+- name: demonstrate find module in ansible
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  gather_facts: no
+  tasks:
+   - name: Task to use find module
+     find:
+      path:
+       - /etc
+       - /var
+       - /usr
+      patterns: 
+       - '*.old'
+       - '*.log.gz'
+       - 'passwd'
+       - 'httpd'
+      recurse: yes 
+     register: out
+   - name: print the result
+     debug:
+      msg: "{{item.path}}"  
+     loop: "{{out.files}}"
+...

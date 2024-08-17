@@ -1,0 +1,5 @@
+u1_name: oracle
+u1_password: test123
+u1_shell: /bin/bash
+u1_home: /home/oracle
+u1_gecos: "oracle user"

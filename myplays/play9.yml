@@ -1,0 +1,14 @@
+---
+#Play to disable selinux
+- name: Play to modify /etc/selinux/config file
+  hosts: [ 192.168.1.98 ]
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Disable SELINUX
+     lineinfile:
+      path: /etc/selinux/config
+      regexp: ^SELINUX
+      line: "SELINUX=disabled"
+...
+    

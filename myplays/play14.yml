@@ -1,0 +1,13 @@
+---
+- name: play to demonstrate archieve module. ie tar and gzip
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: task to archieve the given directory
+     archive:
+       path:
+        - /etc/*
+       format: gz # compreeses the archive
+       dest: my1.tar #by default it will be store in ansible home directory
+...

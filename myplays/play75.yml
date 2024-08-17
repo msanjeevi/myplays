@@ -1,0 +1,19 @@
+---
+- name: Play to demonstrate when condition along with ansible facts
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  vars:
+   pkg: kernel
+  tasks:
+   - name: task to update kernel if total memory is  > 2048MB
+     package:
+      name: "{{pkg}}"
+      state: latest
+     when: ansible_memory_mb.real.total > 2048
+    #update kernel only if total installed RAM is Gretaer than 2GB
+   - name: Print total memory available in the managed node {{ansible_hostname}}
+     debug:
+      msg: Total memory Available in {{ansible_hostname}} is {{ansible_memory_mb.real.total}}
+...
+#End Show

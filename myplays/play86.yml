@@ -1,0 +1,30 @@
+---
+- name: Play to print multiple debug messages
+  hosts: localhost
+  gather_facts: flush_handlers
+  tasks: 
+   - name: Task1 - print the test
+     debug:
+      msg: "Task1 -Red Planet"
+     tags: 
+      - mars
+      - never 
+   - name: Task2 - print the test
+     debug:
+      msg: "Task2 - Mosaic Planet"
+     tags: Jupiter 
+   - name: Task3 - print the test
+     debug:
+      msg: "Task3 - Blue Planet"
+     tags: Earth 
+   - name: Task4 - print the test
+     debug:
+      msg: "Task4 - Mist Planet" 
+     tags: 
+      - venus
+      - always
+#always tag causes the task to always be excuted even if you did not specify in --tags option
+#Never tag cause the task to not to process . you can invoke this by --tag=tagname explicitly
+#You can have multiple tags for the same tasks.
+#default tag is : all      
+...      

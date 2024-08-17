@@ -1,0 +1,20 @@
+---
+- name: Play to demonstrate pause module
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  gather_facts: no
+  vars:
+   wait_sec: 15
+  tasks:
+   - name: Print something
+     debug:
+      msg: "Hi there...You are about to wait for {{wait_sec}}"
+   - name: Play to pause for {{wait_sec}} seconds
+     pause: 
+      seconds: "{{wait_sec}}"
+   - name: Print something after the wait
+     debug:
+      msg: "Hi there...You waited for {{wait_sec}}"
+...
+  

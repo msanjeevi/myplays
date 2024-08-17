@@ -1,0 +1,21 @@
+---
+- name: Demonstrate failed task with ignore_erros and print register variable content
+  hosts: 192.168.1.31
+  gather_facts: no
+  vars:
+   pkg_name: httpd1
+  remote_user: ansible
+  become: true
+  tasks:
+   - name: task to install a package
+     yum:
+      name: "{{pkg_name}}"
+      state: latest
+     register: outvar
+     ignore_errors: true #do not exit the playbook if task fails.
+   - name: This is second task - Print the register variable
+     debug: 
+      msg: "{{outvar.msg}}"
+     # var: outvar
+... 
+#end of the play.

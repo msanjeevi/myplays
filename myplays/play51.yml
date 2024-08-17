@@ -1,0 +1,17 @@
+---
+- name: Play book to download file from the given URL
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  gather_facts: no
+  vars: 
+   f_url: http://192.168.2.45:91/BaseOS/Packages/glibc-2.28-127.el8.x86_64.rpm
+  tasks:
+   - name: Download the file from the given URL
+     get_url:
+      url: "{{f_url}}"
+      dest: /home/ansible
+...
+#End
+
+  

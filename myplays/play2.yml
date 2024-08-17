@@ -1,0 +1,17 @@
+---
+- name: session to add user
+  hosts: all
+  become: yes
+  remote_user: ansible
+  gather_facts: no
+  tasks:
+   - name: to add new user
+     user: 
+       name: madan1
+       uid: 8883
+       password: "{{'test123' |password_hash('sha512') }}"
+       home: /user/tom
+       comment: user created by ansible 
+       shell: /bin/bash
+       state: present
+...

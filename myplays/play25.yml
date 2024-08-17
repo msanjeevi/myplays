@@ -1,0 +1,10 @@
+---
+- name: Play to demonstrate hostname change
+  hosts: [ 192.168.1.98 ] 
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: play to change hostname
+     hostname:
+      name: dav.alclabs.in #change hostname permanently
+...

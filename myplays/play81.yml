@@ -1,0 +1,43 @@
+---
+- name: play to implement handlers while installing package, start service, enable firewall etc
+  hosts: localhost
+  gather_facts: false
+  become: true
+  tasks:
+   - name: Task to install package
+     yum:
+      name: "{{package}}" #read this value from command line with -e option
+      state: latest
+     notify: 
+      - startftpserver
+      - startfw
+      - addport
+      - restartfw
+     when: package is defined
+   #Noifying handles only happen if the module results to change
+   #If change did'not happen ie change=false, then handles are not invoked
+   - name: Print the failure messsage if package variable is not defined
+     fail:
+      msg: "You have not defined package variable. Use -e option package=pkgname
+            while calling this playbook"
+     when: package is not defined
+  handlers:
+   - name: startftpserver
+     service: 
+      name: vsftpd
+      state: started
+   - name: startfw
+     service:
+      name: firewalld
+      state: started
+   - name: addport
+     firewalld:
+      service: ftp
+      state: enabled
+      immediate: yes
+      permanent: yes
+   - name: restartfw
+     service: 
+      name: firewalld
+      state: restarted
+...

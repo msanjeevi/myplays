@@ -1,0 +1,20 @@
+---
+- name: Play to demonstrate variables
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  vars:
+   user:
+    trainer: 
+     first_name: 
+     last_name:
+    student:
+     first_name:
+     last_name: 
+  tasks:
+   - name: Print Variable Values
+     debug:
+      msg: |
+            "{{user['trainer']['first_name']]}}" and  "{{user['trainer']['last_name']}}"   
+            "{{user['student']['first_name']}}" and "{{user['student']['last_name']}}" 
+...

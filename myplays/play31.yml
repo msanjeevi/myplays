@@ -1,0 +1,30 @@
+---
+- name: Play to demonstrate variables
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  vars:
+   user1: 
+    name: tjoseph
+    gecos: "Tarun Joseph is from Devops"
+    home: /home/tjoseph
+    shell: /bin/bash
+   user2:
+    name: gruby
+    gecos: "Gog Rubi is from devops"
+    home: /home/gruby
+    shell: /bin/bash
+  tasks:  
+   - name: Task to print variable values
+     debug:
+      msg: |
+            The user1 name is "{{user1['name']}}"
+            The user1 gecos is "{{user1['gecos']}}"  
+            The user1 home is "{{user1['home']}}"
+            The User1 shell is "{{user1['shell']}}"
+            The user2 name is "{{user2['name']}}"
+            The user2 gecos is "{{user2['gecos']}}"
+            The user2 home is "{{user2['home']}}"
+            The user2 shell is "{{user2['shell']}}"
+
+...
