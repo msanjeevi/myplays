@@ -7,3 +7,4 @@
    - name: task to compress a given file
      command: gzip /var/log/messages
 ...
+Changed in new branch
