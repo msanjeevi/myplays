@@ -1,6 +1,6 @@
 ---
 - name: Create a user and add ssh public key to user's authorized keys
-  hosts: [ 192.168.1.98 ]
+  hosts: localhost
   become: true
   remote_user: ansible
   tasks:
