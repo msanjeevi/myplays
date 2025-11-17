@@ -6,7 +6,7 @@
   tasks:
    - name: Add a user
      user:
-       name: asian
+       name: asian01
        password: "{{ 'test123' | password_hash('sha512')}}"
        state: present
    
