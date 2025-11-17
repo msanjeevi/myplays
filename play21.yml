@@ -1,6 +1,6 @@
 ---
 - name: Demonstrate to create a hard link
-  hosts: [ 192.168.1.98 ]
+  hosts: localhost
   become: true
   remote_user: ansible
   tasks:
